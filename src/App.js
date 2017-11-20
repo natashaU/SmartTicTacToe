@@ -144,16 +144,16 @@ class App extends Component {
 
     // When this function is recursively called each time, this is the terminal state
     // to end the recursion.
-    // if there is a winner for 'X' the score is the minimum (-10) and maximum (10)
+    // if there is a winner for 'X' the score is the minimum (-100) and maximum (100)
     // for the AI, this checks to see if the AI or the Human won and returns the
     // corresponding score (or 0 if there is no vacant spots for a tie)
     if (this.checkWinner(board, "X")) {
       return {
-        score: -10
+        score: -100
       };
     } else if (this.checkWinner(board, "O")) {
       return {
-        score: 10
+        score: 100
       };
     } else if (array.length === 0) {
       return {
@@ -187,12 +187,12 @@ class App extends Component {
       }
       board[array[i]] = move.index;
       moves.push(move);
-      // push the score (10, -10 or 0 into the moves array)
+      // push the move object with index and scores (100, -100 or 0) into the moves array.
     }
 
 // iterate through the moves array.
 // The AI wants to 'maximum' the score (ie gain a win), so if any score is better than -infinity
-// then that is the best score (i.e 10). If a play will result in a high score, that
+// then that is the best score (i.e 100). If a play will result in a high score, that
 // is the best move, and the index of the move corresponds to the square where
 // O should insert itself.
     var bestMove;
@@ -205,7 +205,7 @@ class App extends Component {
         }
       }
     } else {
-      // the Human's goal is to minimize. If any score is less than Infinity (ie -10)
+      // the Human's goal is to minimize. If any score is less than Infinity (ie -100)
       // then that is the best score for the human's best predicted move.
       var bestScore = Infinity;
       for (var i = 0; i < moves.length; i++) {
@@ -268,14 +268,14 @@ class App extends Component {
     if (winner) {
       modal = (
         <div className="modal">
-          <h1>We have a winner: {winner}</h1>
+          <h1>The champion is: {winner}</h1>
           <button className="btn focused" onClick={()=> {this.setState({winner: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
     } else if (this.state.tie) {
       modal = (
         <div className="modal">
-          <h1>There's a tie</h1>
+          <h1>You tied with the AI, homie</h1>
           <button className="btn focused" onClick={()=> {this.setState({tie: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
@@ -285,8 +285,8 @@ class App extends Component {
       <div className="App">
         {modal}
         <h1>Tic Tac Toe</h1>
-        <button onClick={()=>{this.setLevel('intermediate')}} className={level === 'intermediate' ? "btn focused" : "btn"}>intermediate</button>
-        <button onClick={()=>{this.setLevel('advanced')}} className={level === 'advanced' ? "btn focused" : "btn"}>advanced</button>
+        <button onClick={()=>{this.setLevel('intermediate')}} className={level === 'intermediate' ? "btn focused" : "btn"}>Average Human</button>
+        <button onClick={()=>{this.setLevel('advanced')}} className={level === 'advanced' ? "btn focused" : "btn"}>Evil Genius</button>
         <Board board={this.state.board} handleClick={this.handleClick}/>
       </div>
     );
