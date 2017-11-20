@@ -3,7 +3,8 @@
 This game incorporates the [Minimax Algorithm](https://en.wikipedia.org/wiki/Minimax#Minimax_algorithm_with_alternate_moves) for an "unbeatable A.I." if the user chooses an advanced game play. 
 
 ## Check out a live version of the game here
-    [CLICK ME TO PLAY THE GAME](http://tictactoe-natashaumer.surge.sh/)
+
+[CLICK ME TO PLAY THE GAME](http://tictactoe-natashaumer.surge.sh/)
 
 
 ## To check out the game locally
@@ -13,4 +14,6 @@ This game incorporates the [Minimax Algorithm](https://en.wikipedia.org/wiki/Min
 
 
 #### Most of the logic for the game is located in the following file:
-    [App.js](https://github.com/natashaU/SmartTicTacToe/blob/minmax/src/App.js)
+
+[App.js](https://github.com/natashaU/SmartTicTacToe/blob/minmax/src/App.js)
+
