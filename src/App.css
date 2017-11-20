@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Monofett');
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+
 
 body {
-  background-color: #e6e6e6;
-  color: #000000;
+  background-color: black;
+  /*color: #01D5DA; */
+  /*background-color: #e6e6e6;
+  color: #000000;*/
 }
 
 .App {
@@ -10,15 +16,24 @@ body {
 }
 
 h1 {
-  color:#000000;
-  font-family: 'Monofett', cursive;
+  /*color:#000000;*/
+
+  color: #27f7f7;
+  /*color: #01D5DA;*/
+  /*font-family: 'Monofett', cursive;*/
+  font-family: "Orbitron", cursive;
+  font-weight: 400;
   font-size: 55px;
 }
 
 .modal h1 {
-  background-color: #ff9999;
-  font-family: 'Monofett', cursive;
+  /*background-color: #ff9999;*/
+  background-color: black;
+  font-family: "Share Tech Mono", cursive;
+  /*font-family: 'Monofett', cursive;*/
   font-size: 50px;
+  color: #27f7f7;
+  /*color: black;*/
 }
 
 .board {
@@ -29,17 +44,22 @@ h1 {
   /*box-sizing: border-box;*/
   display: flex;
   flex-wrap: wrap;
-  box-shadow: 5px 5px 5px grey;
+  box-shadow: 5px 5px 5px #27f7f7;
+  /*box-shadow: 5px 5px 5px grey;*/
 }
 .board > div {
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  border: 1px solid #9E9E9E;
+  border: 1px solid black;
+  /*border: 1px solid #9E9E9E*/;
   width: 33.33%;
   height: 33.33%;
-  background-color: #FAFEFE;
+  /*background-color: #FAFEFE; */
+  background-color: #27f7f7;
+  /*background-color: #01D5DA;*/
+
   font-size: 25px;
   font-weight: 600;
 }
@@ -52,9 +72,15 @@ h1 {
 .btn {
   margin: 10px;
   border-radius: 5px;
-  background-color: #AFB5B0; /* Green */
-  border: none;
-  color: white;
+  border-color: #27f7f7;
+  /*border-color: solid rgba( 0, 150, 254, .5 );*/
+  background-color: #000;
+  /*background-color: #AFB5B0; /* Green */
+  /*border: none;*/
+  color: #27f7f7;
+  font-family:  "Share Tech Mono", cursive;
+  /*color: rgba( 0, 150, 254, .5 );*/
+  /*color: white;*/
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -65,7 +91,9 @@ h1 {
 
 
 .btn.focused {
-  background-color: #4D7E94; /* Green */
+  border-color: #27f7f7;
+  box-shadow: 0 0 20px 2px #27f7f7;
+  /*background-color: #4D7E94; /* Green */
 }
 .modal {
   width: 100%;
