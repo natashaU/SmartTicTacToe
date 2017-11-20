@@ -3,11 +3,10 @@
 This game incorporates the [Minimax Algorithm](https://en.wikipedia.org/wiki/Minimax#Minimax_algorithm_with_alternate_moves) for an "unbeatable A.I." if the user chooses an advanced game play. 
 
 ## Check out a live version of the game here
-    [CLICK ME TO PLAY THE GAME!](http://tictactoe-natashaumer.surge.sh/)
+    [CLICK ME TO PLAY THE GAME](http://tictactoe-natashaumer.surge.sh/)
 
 
 ## To check out the game locally
-
 
     npm install
     npm run start (on localhost:3000)
