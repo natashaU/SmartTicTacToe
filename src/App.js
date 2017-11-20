@@ -136,11 +136,11 @@ class App extends Component {
 
   }
 
-  // The Minimax algorithm I refactored for React (unbeatable A.I.)
+  // A Minimax algorithm I refactored for React (unbeatable A.I.)
   minimax(board, player){
 
     // filter board for vacant spots
-    let array = board.filter((box) => Number.isInteger(box))
+    let vacantArray = board.filter((box) => Number.isInteger(box))
 
     // When this function is recursively called each time, this is the terminal state
     // to end the recursion.
@@ -155,7 +155,7 @@ class App extends Component {
       return {
         score: 100
       };
-    } else if (array.length === 0) {
+    } else if (vacantArray.length === 0) {
       return {
         score: 0
       };
@@ -165,10 +165,10 @@ class App extends Component {
     var moves = [];
 
     // iterates through each vacant spot
-    for (var i = 0; i < array.length; i++) {
+    for (var i = 0; i < vacantArray.length; i++) {
       var move = {};
-      move.index = array[i];
-      board[array[i]] = player;
+      move.index = vacantArray[i];
+      board[vacantArray[i]] = player;
       // Inserts either an X or O into the 'virtual board', depending on
       // the player, the move's index equals the integer that corresponds to the spots on board//
 
@@ -185,9 +185,9 @@ class App extends Component {
         move.score = nextMove.score;
         // if the current player is X, then minimax is called on the AI.
       }
-      board[array[i]] = move.index;
+      board[vacantArray[i]] = move.index;
       moves.push(move);
-      // push the move object with index and scores (100, -100 or 0) into the moves array.
+      // push the move object with index and scores (10, -10 or 0) into the moves array.
     }
 
 // iterate through the moves array.
@@ -205,7 +205,7 @@ class App extends Component {
         }
       }
     } else {
-      // the Human's goal is to minimize. If any score is less than Infinity (ie -100)
+      // the Human's goal is to minimize. If any score is less than Infinity (ie -10)
       // then that is the best score for the human's best predicted move.
       var bestScore = Infinity;
       for (var i = 0; i < moves.length; i++) {
@@ -268,14 +268,14 @@ class App extends Component {
     if (winner) {
       modal = (
         <div className="modal">
-          <h1>The champion is: {winner}</h1>
+          <h1>As a surprise to nobody, the winner is: {winner}</h1>
           <button className="btn focused" onClick={()=> {this.setState({winner: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
     } else if (this.state.tie) {
       modal = (
         <div className="modal">
-          <h1>You tied with the AI, homie</h1>
+          <h1>Congrats! You tied with me, the AI.</h1>
           <button className="btn focused" onClick={()=> {this.setState({tie: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
