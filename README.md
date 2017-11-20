@@ -4,7 +4,7 @@ This game incorporates the [Minimax Algorithm](https://en.wikipedia.org/wiki/Min
 
 ## Check out a live version of the game here
 
-[CLICK ME TO PLAY THE GAME](http://tictactoeai_natashaumer.surge.sh/)
+[CLICK ME TO PLAY THE GAME](http://natashaumer_tictactoe_ai.surge.sh/)
 
 
 ## To check out the game locally
