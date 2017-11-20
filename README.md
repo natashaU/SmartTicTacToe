@@ -7,9 +7,10 @@ This game incorporates the [Minimax Algorithm](https://en.wikipedia.org/wiki/Min
 
 
 ## To check out the game locally
+
 ``` 
     npm install
-    npm run start (http://localhost:3000/)
+    npm run start (on localhost:3000)
 ```
 
 #### Most of the logic for the game is located in the following file:
