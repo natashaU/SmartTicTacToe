@@ -2,9 +2,11 @@
 
 This game incorporates the [Minimax Algorithm](https://en.wikipedia.org/wiki/Minimax#Minimax_algorithm_with_alternate_moves) for an "unbeatable A.I." if the user chooses an advanced game play. 
 
+*** Warning: Danger of [thermonuclear war](https://www.youtube.com/watch?v=NHWjlCaIrQo) in case AI loses ***
+
 ## Check out a live version of the game here
 
-[CLICK ME TO PLAY THE GAME](http://tictactoe-natashaumer.surge.sh/)
+[CLICK ME TO PLAY THE GAME](http://natashaumer_tictactoe_ai.surge.sh/)
 
 
 ## To check out the game locally
