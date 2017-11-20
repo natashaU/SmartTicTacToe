@@ -1,17 +1,24 @@
-
+@import url('https://fonts.googleapis.com/css?family=Monofett');
 
 body {
-  background-color: #E9EDF0;
-  color: #111111;
+  background-color: #e6e6e6;
+  color: #000000;
 }
 
 .App {
   text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+h1 {
+  color:#000000;
+  font-family: 'Monofett', cursive;
+  font-size: 55px;
+}
+
+.modal h1 {
+  background-color: #ff9999;
+  font-family: 'Monofett', cursive;
+  font-size: 50px;
 }
 
 .board {
