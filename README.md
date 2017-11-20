@@ -9,3 +9,7 @@ This game incorporates the [Minimax Algorithm](https://en.wikipedia.org/wiki/Min
 ```
 
 ## Check out a live version of the game here
+    [CLICK ME TO PLAY THE GAME!](http://tictactoe-natashaumer.surge.sh/)
+
+### Most of the logic for the game is located in the following file:
+    [App.js](https://github.com/natashaU/SmartTicTacToe/blob/minmax/src/App.js)
