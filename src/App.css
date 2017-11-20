@@ -37,6 +37,8 @@ h1 {
 }
 
 .board {
+  position: relative;
+  margin-top: 2.5%;
   width: 250px;
   height: 250px;
   /*height: 50%;*/
@@ -52,7 +54,7 @@ h1 {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  border: 1px solid black;
+  border: 3px solid black;
   /*border: 1px solid #9E9E9E*/;
   width: 33.33%;
   height: 33.33%;
@@ -71,7 +73,7 @@ h1 {
 }
 .btn {
   margin: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   border-color: #27f7f7;
   /*border-color: solid rgba( 0, 150, 254, .5 );*/
   background-color: #000;
