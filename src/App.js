@@ -284,7 +284,7 @@ class App extends Component {
     return (
       <div className="App">
         {modal}
-        <h3>Tic Tac Toe</h3>
+        <h1>Tic Tac Toe</h1>
         <button onClick={()=>{this.setLevel('intermediate')}} className={level === 'intermediate' ? "btn focused" : "btn"}>intermediate</button>
         <button onClick={()=>{this.setLevel('advanced')}} className={level === 'advanced' ? "btn focused" : "btn"}>advanced</button>
         <Board board={this.state.board} handleClick={this.handleClick}/>
