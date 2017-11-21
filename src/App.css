@@ -6,7 +6,10 @@
 
 body {
   background-color: black;
-  /*color: #01D5DA; */
+
+
+  color: rgba( 0, 150, 254, 1 );
+  /*color: #01D5DA delete above; */
   /*background-color: #e6e6e6;
   color: #000000;*/
 }
@@ -18,10 +21,11 @@ body {
 h1 {
   /*color:#000000;*/
 
-  color: #27f7f7;
+  /*color: #27f7f7;*/
+  color: rgba( 0, 150, 254, 1 );
   /*color: #01D5DA;*/
   /*font-family: 'Monofett', cursive;*/
-  font-family: "Orbitron", cursive;
+  font-family: 'Orbitron', cursive;
   font-weight: 400;
   font-size: 55px;
 }
@@ -46,20 +50,31 @@ h1 {
   /*box-sizing: border-box;*/
   display: flex;
   flex-wrap: wrap;
-  box-shadow: 5px 5px 5px #27f7f7;
-  /*box-shadow: 5px 5px 5px grey;*/
+  /*box-shadow: 5px 5px 5px #27f7f7;*/
+  box-shadow: 5px 5px 5px rgba( 0, 150, 254, 1 );
 }
 .board > div {
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  border: 3px solid black;
+  /*border: 3px solid black; // i want
+  background-color: #27f7f7; i want*/
+  /*border: 3px rgba( 0, 150, 254, 1 );*/
+
+  background: black;
+  border: 3px solid rgba( 0, 150, 254, 1 );
+  /*border: 3px solid #27f7f7;*/
+
+
+
+
+
+
   /*border: 1px solid #9E9E9E*/;
   width: 33.33%;
   height: 33.33%;
   /*background-color: #FAFEFE; */
-  background-color: #27f7f7;
   /*background-color: #01D5DA;*/
 
   font-size: 25px;
@@ -74,12 +89,14 @@ h1 {
 .btn {
   margin: 10px;
   border-radius: 10px;
-  border-color: #27f7f7;
-  /*border-color: solid rgba( 0, 150, 254, .5 );*/
+  /*border-color: #27f7f7; the old one */
+  border-color: rgba(0, 150, 254, 1);
   background-color: #000;
   /*background-color: #AFB5B0; /* Green */
   /*border: none;*/
-  color: #27f7f7;
+
+  color: rgba( 0, 150, 254, 1 );
+  /*color: #27f7f7; color i wanna use*/
   font-family:  "Share Tech Mono", cursive;
   /*color: rgba( 0, 150, 254, .5 );*/
   /*color: white;*/
@@ -93,8 +110,11 @@ h1 {
 
 
 .btn.focused {
-  border-color: #27f7f7;
-  box-shadow: 0 0 20px 2px #27f7f7;
+  /*border-color: #27f7f7;
+  box-shadow: 0 0 20px 2px #27f7f7;*/
+  border-color: rgba( 0, 150, 254, 1 );
+  box-shadow: 0 0 70px 10px rgba( 0, 150, 254, .4 );
+
   /*background-color: #4D7E94; /* Green */
 }
 .modal {

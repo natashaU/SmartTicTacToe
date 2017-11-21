@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board';
 import './App.css';
+import TypeWriter from 'react-typewriter';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class App extends Component {
       player: "X",
       winner: false,
       tie: false,
-      level: 'intermediate'
+      level: 'intermediate',
+      testing: ''
     };
     this.handleClick = this.handleClick.bind(this)
     // function for user click event on each square
@@ -23,6 +25,7 @@ class App extends Component {
     this.setLevel = this.setLevel.bind(this)
     // function to set level to intermediate or advanced
   }
+
 
 
   nextMove(){
@@ -152,6 +155,7 @@ class App extends Component {
       } else {
         let index = array[Math.floor(Math.random() * array.length)];
         move = {index: index}
+
       }
     }
     return move
@@ -297,7 +301,7 @@ class App extends Component {
     } else if (this.state.tie) {
       modal = (
         <div className="modal">
-          <h1>Congrats! You tied with me, the AI.</h1>
+        <TypeWriter typing={5}><h1>Congrats! You tied with me, the AI.</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({tie: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
@@ -318,3 +322,5 @@ class App extends Component {
 }
 
 export default App;
+
+// <h1>{Congrats! You tied with me, the AI.}</h1>
