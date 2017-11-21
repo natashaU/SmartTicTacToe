@@ -110,6 +110,7 @@ class App extends Component {
           // then AI picks that spot to block X
         }
       }
+
       let cornerMove
       for (var i=0; i< array.length; i++) {
         if(corners.includes(array[i])){
@@ -127,6 +128,7 @@ class App extends Component {
       } else if(Number.isInteger(cornerMove)) {
 
         move = {index: cornerMove}
+
       } else {
         let index = array[Math.floor(Math.random() * array.length)];
         move = {index: index}
@@ -162,19 +164,19 @@ class App extends Component {
     }
 
 // moves array to keep track of scores
-    var moves = [];
+    var allMoves = [];
 
     // iterates through each vacant spot
     for (var i = 0; i < vacantArray.length; i++) {
-      var move = {};
-      move.index = vacantArray[i];
+      var possibleMove = {};
+      possibleMove.index = vacantArray[i];
       board[vacantArray[i]] = player;
       // Inserts either an X or O into the 'virtual board', depending on
       // the player, the move's index equals the integer that corresponds to the spots on board//
 
       if (player == "O") {
         var nextMove = this.minimax(board, "X");
-        move.score = nextMove.score;
+        possibleMove.score = nextMove.score;
         // if current player is AI, minimax function is recursively called on
         // on X (to see what the best move for the human would be, after the AI's move).
         // The Ai is predicting the best winning strategy for the human so it can counteract. This process
@@ -182,11 +184,11 @@ class App extends Component {
         // for each iteration on the vacants spots array.
       } else {
         var nextMove = this.minimax(board, "O");
-        move.score = nextMove.score;
+        possibleMove.score = nextMove.score;
         // if the current player is X, then minimax is called on the AI.
       }
-      board[vacantArray[i]] = move.index;
-      moves.push(move);
+      board[vacantArray[i]] = possibleMove.index;
+      allMoves.push(possibleMove);
       // push the move object with index and scores (10, -10 or 0) into the moves array.
     }
 
@@ -198,9 +200,9 @@ class App extends Component {
     var bestMove;
     if (player === "O") {
       var bestScore = -Infinity;
-      for (var i = 0; i < moves.length; i++) {
-        if (moves[i].score > bestScore) {
-          bestScore = moves[i].score;
+      for (var i = 0; i < allMoves.length; i++) {
+        if (allMoves[i].score > bestScore) {
+          bestScore = allMoves[i].score;
           bestMove = i;
         }
       }
@@ -208,14 +210,14 @@ class App extends Component {
       // the Human's goal is to minimize. If any score is less than Infinity (ie -10)
       // then that is the best score for the human's best predicted move.
       var bestScore = Infinity;
-      for (var i = 0; i < moves.length; i++) {
-        if (moves[i].score < bestScore) {
-          bestScore = moves[i].score;
+      for (var i = 0; i < allMoves.length; i++) {
+        if (allMoves[i].score < bestScore) {
+          bestScore = allMoves[i].score;
           bestMove = i;
         }
       }
     }
-    return moves[bestMove];
+    return allMoves[bestMove];
     // return the bestMove
   }
 
