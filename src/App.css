@@ -36,7 +36,8 @@ h1 {
   font-family: "Share Tech Mono", cursive;
   /*font-family: 'Monofett', cursive;*/
   font-size: 50px;
-  color: #27f7f7;
+  /*color: #27f7f7;*/
+  color: rgba( 0, 150, 254, 1 )
   /*color: black;*/
 }
 
@@ -122,5 +123,5 @@ h1 {
   height: 100%;
   position: absolute;
   opacity: 0.9;
-  background-color: white;
+  background-color: black;
 }

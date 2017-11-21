@@ -273,7 +273,7 @@ class App extends Component {
     // the board array at that spot and the state is updated to reflect the new
     // board, the "next move" method is called for the AI move. This prevents the
     // user from clicking on the same spot twice, otherwise the functions are not called.
-    if(Number.isInteger(board[i])) {
+    if(Number.isInteger(board[i]) && this.state.winner === false) {
       board[i] = this.state.player
       this.setState({board})
       this.nextMove()
@@ -301,7 +301,7 @@ class App extends Component {
     } else if (this.state.tie) {
       modal = (
         <div className="modal">
-        <TypeWriter typing={5}><h1>Congrats! You tied with me, the AI.</h1></TypeWriter>
+        <TypeWriter typing={1}><h1>Congrats! You tied with me, the AI</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({tie: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
