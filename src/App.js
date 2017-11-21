@@ -302,7 +302,7 @@ class App extends Component {
     } else if (this.state.tie) {
       modal = (
         <div className="modal">
-        <TypeWriter typing={1}><h1>Congrats! You tied with me, the AI.</h1></TypeWriter>
+        <TypeWriter typing={1}><h1>Stalemate! Sometimes the only winning move against me, the AI, is not to play</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({tie: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )

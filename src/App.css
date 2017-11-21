@@ -8,6 +8,7 @@ body {
   background-color: black;
   color: rgba( 0, 150, 254, 1 );
   font-size: 16px;
+
   /*color: #01D5DA delete above; */
   /*background-color: #e6e6e6;
   color: #000000;*/
@@ -34,7 +35,7 @@ h1 {
   /*background-color: black;*/
   font-family: "Share Tech Mono", cursive;
   /*font-family: 'Monofett', cursive;*/
-  /*font-size: 50px; */
+  /*font-size: 50px;*/
   font-size: 3.125em;
   /*color: #27f7f7;*/
   color: rgba( 0, 150, 254, 1 )
@@ -76,6 +77,7 @@ h1 {
   /*font-size: 25px;*/
   font-size: 1.5625em;
   font-weight: 600;
+  /*z-index: 100;*/
 }
 .flex {
   display: flex;
