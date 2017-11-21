@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Board from './Board';
 import './App.css';
+import TypeWriter from 'react-typewriter';
+
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class App extends Component {
       player: "X",
       winner: false,
       tie: false,
-      level: 'intermediate'
+      level: 'intermediate',
+      testing: ''
     };
     this.handleClick = this.handleClick.bind(this)
     // function for user click event on each square
@@ -23,6 +26,7 @@ class App extends Component {
     this.setLevel = this.setLevel.bind(this)
     // function to set level to intermediate or advanced
   }
+
 
 
   nextMove(){
@@ -110,6 +114,22 @@ class App extends Component {
           // then AI picks that spot to block X
         }
       }
+
+      let oppositeXCorner
+        if (board[0] === 'X' && array.includes(8)) {
+          oppositeXCorner = 8;
+        } else if (board[2] === 'X' && array.includes(6)) {
+          oppositeXCorner = 6;
+        } else if (board[6] === 'X' && array.includes(2)) {
+          oppositeXCorner = 2;
+        } else if (board[8] === 'X' && array.includes(0)) {
+          oppositeXCorner = 0;
+      }  else {
+          oppositeXCorner = null;
+      }
+
+      // pick a corner opposite from X's corner for next best move play
+
       let cornerMove
       for (var i=0; i< array.length; i++) {
         if(corners.includes(array[i])){
@@ -117,19 +137,26 @@ class App extends Component {
           // pick a corner move
         }
       }
+
       // Choose the move, if any of the above conditionals are met
       // if not, choose a random number from the leftover vacant spots (edges)
       if(Number.isInteger(oMove)){
         move = {index: oMove}
+
       } else if (Number.isInteger(xMove)) {
-
         move = {index: xMove}
-      } else if(Number.isInteger(cornerMove)) {
 
+      } else if (Number.isInteger(oppositeXCorner)) {
+        move = {index: oppositeXCorner}
+
+
+      } else if(Number.isInteger(cornerMove)) {
         move = {index: cornerMove}
+
       } else {
         let index = array[Math.floor(Math.random() * array.length)];
         move = {index: index}
+
       }
     }
     return move
@@ -162,19 +189,19 @@ class App extends Component {
     }
 
 // moves array to keep track of scores
-    var moves = [];
+    var allMoves = [];
 
     // iterates through each vacant spot
     for (var i = 0; i < vacantArray.length; i++) {
-      var move = {};
-      move.index = vacantArray[i];
+      var possibleMove = {};
+      possibleMove.index = vacantArray[i];
       board[vacantArray[i]] = player;
       // Inserts either an X or O into the 'virtual board', depending on
       // the player, the move's index equals the integer that corresponds to the spots on board//
 
       if (player == "O") {
         var nextMove = this.minimax(board, "X");
-        move.score = nextMove.score;
+        possibleMove.score = nextMove.score;
         // if current player is AI, minimax function is recursively called on
         // on X (to see what the best move for the human would be, after the AI's move).
         // The Ai is predicting the best winning strategy for the human so it can counteract. This process
@@ -182,12 +209,12 @@ class App extends Component {
         // for each iteration on the vacants spots array.
       } else {
         var nextMove = this.minimax(board, "O");
-        move.score = nextMove.score;
+        possibleMove.score = nextMove.score;
         // if the current player is X, then minimax is called on the AI.
       }
-      board[vacantArray[i]] = move.index;
-      moves.push(move);
-      // push the move object with index and scores (10, -10 or 0) into the moves array.
+      board[vacantArray[i]] = possibleMove.index;
+      allMoves.push(possibleMove);
+      // push the 'possible move' object with index and scores (100, -100 or 0) into the 'all moves' array.
     }
 
 // iterate through the moves array.
@@ -198,24 +225,24 @@ class App extends Component {
     var bestMove;
     if (player === "O") {
       var bestScore = -Infinity;
-      for (var i = 0; i < moves.length; i++) {
-        if (moves[i].score > bestScore) {
-          bestScore = moves[i].score;
+      for (var i = 0; i < allMoves.length; i++) {
+        if (allMoves[i].score > bestScore) {
+          bestScore = allMoves[i].score;
           bestMove = i;
         }
       }
     } else {
-      // the Human's goal is to minimize. If any score is less than Infinity (ie -10)
+      // the Human's goal is to minimize. If any score is less than Infinity (ie -100)
       // then that is the best score for the human's best predicted move.
       var bestScore = Infinity;
-      for (var i = 0; i < moves.length; i++) {
-        if (moves[i].score < bestScore) {
-          bestScore = moves[i].score;
+      for (var i = 0; i < allMoves.length; i++) {
+        if (allMoves[i].score < bestScore) {
+          bestScore = allMoves[i].score;
           bestMove = i;
         }
       }
     }
-    return moves[bestMove];
+    return allMoves[bestMove];
     // return the bestMove
   }
 
@@ -247,7 +274,7 @@ class App extends Component {
     // the board array at that spot and the state is updated to reflect the new
     // board, the "next move" method is called for the AI move. This prevents the
     // user from clicking on the same spot twice, otherwise the functions are not called.
-    if(Number.isInteger(board[i])) {
+    if(Number.isInteger(board[i]) && this.state.winner === false) {
       board[i] = this.state.player
       this.setState({board})
       this.nextMove()
@@ -268,14 +295,14 @@ class App extends Component {
     if (winner) {
       modal = (
         <div className="modal">
-          <h1>As a surprise to nobody, the winner is: {winner}</h1>
+        <TypeWriter typing={1}><h1>As a surprise to nobody, the winner is: {winner}</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({winner: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
     } else if (this.state.tie) {
       modal = (
         <div className="modal">
-          <h1>Congrats! You tied with me, the AI.</h1>
+        <TypeWriter typing={1}><h1>Congrats! You tied with me, the AI.</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({tie: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
@@ -296,3 +323,4 @@ class App extends Component {
 }
 
 export default App;
+
