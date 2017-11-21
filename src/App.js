@@ -3,6 +3,7 @@ import Board from './Board';
 import './App.css';
 import TypeWriter from 'react-typewriter';
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -213,7 +214,7 @@ class App extends Component {
       }
       board[vacantArray[i]] = possibleMove.index;
       allMoves.push(possibleMove);
-      // push the move object with index and scores (10, -10 or 0) into the moves array.
+      // push the 'possible move' object with index and scores (100, -100 or 0) into the 'all moves' array.
     }
 
 // iterate through the moves array.
@@ -231,7 +232,7 @@ class App extends Component {
         }
       }
     } else {
-      // the Human's goal is to minimize. If any score is less than Infinity (ie -10)
+      // the Human's goal is to minimize. If any score is less than Infinity (ie -100)
       // then that is the best score for the human's best predicted move.
       var bestScore = Infinity;
       for (var i = 0; i < allMoves.length; i++) {
@@ -294,14 +295,14 @@ class App extends Component {
     if (winner) {
       modal = (
         <div className="modal">
-          <h1>As a surprise to nobody, the winner is: {winner}</h1>
+        <TypeWriter typing={1}><h1>As a surprise to nobody, the winner is: {winner}</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({winner: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
     } else if (this.state.tie) {
       modal = (
         <div className="modal">
-        <TypeWriter typing={1}><h1>Congrats! You tied with me, the AI</h1></TypeWriter>
+        <TypeWriter typing={1}><h1>Congrats! You tied with me, the AI.</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({tie: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
@@ -323,4 +324,3 @@ class App extends Component {
 
 export default App;
 
-// <h1>{Congrats! You tied with me, the AI.}</h1>

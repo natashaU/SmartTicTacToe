@@ -6,7 +6,9 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-scripts": "1.0.17",
-    "react-typewriter": "^0.4.1"
+    "react-typewriter": "^0.4.1",
+    "react-typing": "^1.0.0",
+    "react-typing-animation": "^1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
