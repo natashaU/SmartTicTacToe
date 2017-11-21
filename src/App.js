@@ -111,6 +111,21 @@ class App extends Component {
         }
       }
 
+      let oppositeXCorner
+        if (board[0] === 'X' && array.includes(8)) {
+          oppositeXCorner = 8;
+        } else if (board[2] === 'X' && array.includes(6)) {
+          oppositeXCorner = 6;
+        } else if (board[6] === 'X' && array.includes(2)) {
+          oppositeXCorner = 2;
+        } else if (board[8] === 'X' && array.includes(0)) {
+          oppositeXCorner = 0;
+      }  else {
+          oppositeXCorner = null;
+      }
+
+      // pick a corner opposite from X's corner for next best move play
+
       let cornerMove
       for (var i=0; i< array.length; i++) {
         if(corners.includes(array[i])){
@@ -118,15 +133,20 @@ class App extends Component {
           // pick a corner move
         }
       }
+
       // Choose the move, if any of the above conditionals are met
       // if not, choose a random number from the leftover vacant spots (edges)
       if(Number.isInteger(oMove)){
         move = {index: oMove}
+
       } else if (Number.isInteger(xMove)) {
-
         move = {index: xMove}
-      } else if(Number.isInteger(cornerMove)) {
 
+      } else if (Number.isInteger(oppositeXCorner)) {
+        move = {index: oppositeXCorner}
+
+
+      } else if(Number.isInteger(cornerMove)) {
         move = {index: cornerMove}
 
       } else {
