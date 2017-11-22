@@ -43,9 +43,8 @@ class App extends Component {
 
     // calls the function for intermediate or advanced levels, depending on what the user
     // had choosen during the click event.
-    if (this.state.winner !== false) {
-      return
-    } else if (this.state.level === 'intermediate') {
+
+    if (this.state.level === 'intermediate') {
       move = this.intermediateMove(this.state.board, "O")
     } else {
       move = this.minimax(this.state.board, "O")
