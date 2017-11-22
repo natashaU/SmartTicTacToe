@@ -13,7 +13,6 @@ class App extends Component {
       winner: false,
       tie: false,
       level: 'intermediate',
-      testing: ''
     };
     this.handleClick = this.handleClick.bind(this)
     // function for user click event on each square
@@ -30,7 +29,11 @@ class App extends Component {
 
 
   nextMove(){
+
+
     const winner = this.checkWinner
+
+
 
     let array = this.state.board.filter((box) => Number.isInteger(box));
     // Filters the array for vacant spots ( any box that does not have an integer,
@@ -40,11 +43,14 @@ class App extends Component {
 
     // calls the function for intermediate or advanced levels, depending on what the user
     // had choosen during the click event.
-    if (this.state.level === 'intermediate') {
+    if (this.state.winner !== false) {
+      return
+    } else if (this.state.level === 'intermediate') {
       move = this.intermediateMove(this.state.board, "O")
     } else {
       move = this.minimax(this.state.board, "O")
     }
+
     let board = this.state.board
     board[move.index] = "O"
     this.setState({board: board})
@@ -272,14 +278,23 @@ class App extends Component {
 
     // if the square value is a number (ie not X or O) then X is inserted into
     // the board array at that spot and the state is updated to reflect the new
-    // board, the "next move" method is called for the AI move. This prevents the
-    // user from clicking on the same spot twice, otherwise the functions are not called.
+    // board.This prevents the user from clicking on the same spot twice,
+    // otherwise the functions are not called.
     if(Number.isInteger(board[i]) && this.state.winner === false) {
       board[i] = this.state.player
       this.setState({board})
-      this.nextMove()
+
+      // check to see if X wins, if X wins, do not call the AI's next move.
+      if (this.checkWinner(this.state.board,'X')) {
+      this.setState({winner:'X'})
+      return
+      } else {
+        // the "next move" method is called for the AI move.
+        this.nextMove()
+      }
     }
   }
+
   // This function changes the level to either Intermediate or Advanced by changing
   // the state
   setLevel(level) {
