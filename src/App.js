@@ -34,7 +34,6 @@ class App extends Component {
     const winner = this.checkWinner
 
 
-
     let array = this.state.board.filter((box) => Number.isInteger(box));
     // Filters the array for vacant spots ( any box that does not have an integer,
    //ie X or O), in order to loop through a new array of vacant spots
@@ -82,6 +81,7 @@ class App extends Component {
     let array = board.filter((box) => Number.isInteger(box));
     // create a vacant spots array
     let move = {}
+
     const corners = [0, 2, 6, 8]
     // list of all the corner spots on the board
 
@@ -131,16 +131,18 @@ class App extends Component {
           oppositeXCorner = 0;
       }  else {
           oppositeXCorner = null;
-      }
+      } // pick a corner opposite from X's corner for next best move play
 
-      // pick a corner opposite from X's corner for next best move play
 
       let cornerMove
+      let vacantCorners = [];
       for (var i=0; i< array.length; i++) {
-        if(corners.includes(array[i])){
-          cornerMove = array[i]
-          // pick a corner move
+        if (corners.includes(array[i])){
+          vacantCorners.push(array[i])
         }
+        if (vacantCorners.length > 0){
+          cornerMove = vacantCorners[Math.floor(Math.random() * vacantCorners.length)]
+        } // pick a random corner move, if vacant
       }
 
       // Choose the move, if any of the above conditionals are met
@@ -159,8 +161,8 @@ class App extends Component {
         move = {index: cornerMove}
 
       } else {
-        let index = array[Math.floor(Math.random() * array.length)];
-        move = {index: index}
+        let edgeIndex = array[Math.floor(Math.random() * array.length)];
+        move = {index: edgeIndex}
 
       }
     }
@@ -193,8 +195,11 @@ class App extends Component {
       };
     }
 
+
+
 // moves array to keep track of scores
     var allMoves = [];
+
 
     // iterates through each vacant spot
     for (var i = 0; i < vacantArray.length; i++) {
@@ -288,8 +293,8 @@ class App extends Component {
       this.setState({winner:'X'})
       return
       } else {
-        // the "next move" method is called for the AI move.
-        this.nextMove()
+        // the "next move" method is called for the AI move, after 1/2 second delay.
+        setTimeout(()=>this.nextMove(), 500);
       }
     }
   }
@@ -305,18 +310,25 @@ class App extends Component {
     let winner = this.state.winner;
     let level = this.state.level;
 
+    let winnerSentence = winner === 'O'? "As a surprise to nobody, I won!" : "You won! This must be a computer-enhanced hallucination.";
+
+    let tieSentence = ["Stalemate! Sometimes the only winning move against me is not to play.", "Stalemate! How about a nice game of chess?",
+    "Stalemate! This is a boring game. There's always a tie."][[Math.floor(Math.random() * 3)]];
+
+
+
     let modal
     if (winner) {
       modal = (
         <div className="modal">
-        <TypeWriter typing={1}><h1>As a surprise to nobody, the winner is: {winner}</h1></TypeWriter>
+        <TypeWriter typing={1}><h1>{winnerSentence}</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({winner: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
     } else if (this.state.tie) {
       modal = (
         <div className="modal">
-        <TypeWriter typing={1}><h1>Stalemate! Sometimes the only winning move against me is not to play.</h1></TypeWriter>
+        <TypeWriter typing={1}><h1>{tieSentence}</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({tie: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
@@ -337,4 +349,6 @@ class App extends Component {
 }
 
 export default App;
+
+
 
