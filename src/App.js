@@ -305,18 +305,25 @@ class App extends Component {
     let winner = this.state.winner;
     let level = this.state.level;
 
+    let winnerSentence = winner === 'O'? "As a surprise to nobody, I won!" : "You won! This must be a computer-enhanced hallucination.";
+
+    let tieSentence = ["Stalemate! Sometimes the only winning move against me is not to play.", "Stalemate! How about a nice game of chess?",
+    "Stalemate! This is a boring game. There's always a tie."][[Math.floor(Math.random() * 3)]];
+
+
+
     let modal
     if (winner) {
       modal = (
         <div className="modal">
-        <TypeWriter typing={1}><h1>As a surprise to nobody, the winner is: {winner}</h1></TypeWriter>
+        <TypeWriter typing={1}><h1>{winnerSentence}</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({winner: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
     } else if (this.state.tie) {
       modal = (
         <div className="modal">
-        <TypeWriter typing={1}><h1>Stalemate! Sometimes the only winning move against me is not to play.</h1></TypeWriter>
+        <TypeWriter typing={1}><h1>{tieSentence}</h1></TypeWriter>
           <button className="btn focused" onClick={()=> {this.setState({tie: false, board: [0,1,2,3,4,5,6,7,8]})}}>New Game!</button>
         </div>
       )
@@ -337,4 +344,6 @@ class App extends Component {
 }
 
 export default App;
+
+// <TypeWriter typing={1}><h1>As a surprise to nobody, the winner is: {winner}</h1></TypeWriter>
 
