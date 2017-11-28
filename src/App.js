@@ -13,6 +13,7 @@ class App extends Component {
       winner: false,
       tie: false,
       level: 'intermediate',
+      corners: [0, 2, 6, 8],
     };
     this.handleClick = this.handleClick.bind(this)
     // function for user click event on each square
@@ -32,7 +33,6 @@ class App extends Component {
 
 
     const winner = this.checkWinner
-
 
 
     let array = this.state.board.filter((box) => Number.isInteger(box));
@@ -82,6 +82,7 @@ class App extends Component {
     let array = board.filter((box) => Number.isInteger(box));
     // create a vacant spots array
     let move = {}
+
     const corners = [0, 2, 6, 8]
     // list of all the corner spots on the board
 
@@ -137,7 +138,7 @@ class App extends Component {
       let cornerMove
       let vacantCorners = [];
       for (var i=0; i< array.length; i++) {
-        if(corners.includes(array[i])){
+        if (corners.includes(array[i])){
           vacantCorners.push(array[i])
         }
         if (vacantCorners.length > 0){
@@ -161,8 +162,8 @@ class App extends Component {
         move = {index: cornerMove}
 
       } else {
-        let index = array[Math.floor(Math.random() * array.length)];
-        move = {index: index}
+        let edgeIndex = array[Math.floor(Math.random() * array.length)];
+        move = {index: edgeIndex}
 
       }
     }
@@ -195,8 +196,11 @@ class App extends Component {
       };
     }
 
+
+
 // moves array to keep track of scores
     var allMoves = [];
+
 
     // iterates through each vacant spot
     for (var i = 0; i < vacantArray.length; i++) {
