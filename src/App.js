@@ -131,16 +131,18 @@ class App extends Component {
           oppositeXCorner = 0;
       }  else {
           oppositeXCorner = null;
-      }
+      } // pick a corner opposite from X's corner for next best move play
 
-      // pick a corner opposite from X's corner for next best move play
 
       let cornerMove
+      let vacantCorners = [];
       for (var i=0; i< array.length; i++) {
         if(corners.includes(array[i])){
-          cornerMove = array[i]
-          // pick a corner move
+          vacantCorners.push(array[i])
         }
+        if (vacantCorners.length > 0){
+          cornerMove = vacantCorners[Math.floor(Math.random() * vacantCorners.length)]
+        } // pick a random corner move, if vacant
       }
 
       // Choose the move, if any of the above conditionals are met
@@ -288,8 +290,8 @@ class App extends Component {
       this.setState({winner:'X'})
       return
       } else {
-        // the "next move" method is called for the AI move.
-        this.nextMove()
+        // the "next move" method is called for the AI move, after 1/2 second delay.
+        setTimeout(()=>this.nextMove(), 500);
       }
     }
   }
@@ -345,5 +347,5 @@ class App extends Component {
 
 export default App;
 
-// <TypeWriter typing={1}><h1>As a surprise to nobody, the winner is: {winner}</h1></TypeWriter>
+
 
