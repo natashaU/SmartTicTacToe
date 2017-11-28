@@ -13,7 +13,6 @@ class App extends Component {
       winner: false,
       tie: false,
       level: 'intermediate',
-      corners: [0, 2, 6, 8],
     };
     this.handleClick = this.handleClick.bind(this)
     // function for user click event on each square
