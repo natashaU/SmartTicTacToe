@@ -12,10 +12,16 @@ This game incorporates the [Minimax Algorithm](https://en.wikipedia.org/wiki/Min
 ## To check out the game locally
 
     npm install
-    npm run start (on localhost:3000)
+    npm run start (on http://localhost:3000)
 
 
 #### Most of the logic for the game is located in the following file:
 
-[App.js](https://github.com/natashaU/SmartTicTacToe/blob/minmax/src/App.js)
+[App.js](https://github.com/natashaU/SmartTicTacToe/blob/master/src/App.js)
+
+**My own home-grown algorithm for the AI:**
+[Code is located here](https://github.com/natashaU/SmartTicTacToe/blob/f51f10367f8ff03d12f4dff29b987aac2f53f751/src/App.js#L80-L171)
+
+**Code for a Minimax algorithm (unbeatable A.I.) I refactored for React:**
+[Minimax Code here](https://github.com/natashaU/SmartTicTacToe/blob/f51f10367f8ff03d12f4dff29b987aac2f53f751/src/App.js#L174-L257)
 
