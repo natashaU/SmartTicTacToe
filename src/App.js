@@ -13,6 +13,16 @@ class App extends Component {
       winner: false,
       tie: false,
       level: 'intermediate',
+      winningCombinations: [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [2,4,6],
+      [0,4,8]
+      ],
     };
     this.handleClick = this.handleClick.bind(this)
     // function for user click event on each square
@@ -173,6 +183,7 @@ class App extends Component {
   // A Minimax algorithm I refactored for React (unbeatable A.I.)
   minimax(board, player){
 
+
     // filter board for vacant spots
     let vacantArray = board.filter((box) => Number.isInteger(box))
 
@@ -197,35 +208,35 @@ class App extends Component {
 
 
 
-// moves array to keep track of scores
+    // moves array to keep track of scores
     var allMoves = [];
 
 
     // iterates through each vacant spot
-    for (var i = 0; i < vacantArray.length; i++) {
+    vacantArray.forEach((position) => {
       var possibleMove = {};
-      possibleMove.index = vacantArray[i];
-      board[vacantArray[i]] = player;
+      possibleMove.index = position;
+      board[position] = player;
       // Inserts either an X or O into the 'virtual board', depending on
       // the player, the move's index equals the integer that corresponds to the spots on board//
 
-      if (player == "O") {
-        var nextMove = this.minimax(board, "X");
-        possibleMove.score = nextMove.score;
+
+      player === "O"? (
+          possibleMove.score = this.minimax(board, "X").score
+        ) : (
+          possibleMove.score = this.minimax(board, "O").score
+        );
         // if current player is AI, minimax function is recursively called on
         // on X (to see what the best move for the human would be, after the AI's move).
         // The Ai is predicting the best winning strategy for the human so it can counteract. This process
         // keeps repeating and alternating between X and O until a terminal state is reached,
-        // for each iteration on the vacants spots array.
-      } else {
-        var nextMove = this.minimax(board, "O");
-        possibleMove.score = nextMove.score;
-        // if the current player is X, then minimax is called on the AI.
-      }
-      board[vacantArray[i]] = possibleMove.index;
-      allMoves.push(possibleMove);
-      // push the 'possible move' object with index and scores (100, -100 or 0) into the 'all moves' array.
-    }
+        // for each iteration on the vacants spots array. If the current player is X,
+        // then minimax is called on AI.
+
+        board[position] = possibleMove.index;
+        allMoves.push(possibleMove);
+        // push the 'possible move' object with index and scores (100, -100 or 0) into the 'all moves' array.
+    });
 
 // iterate through the moves array.
 // The AI wants to 'maximum' the score (ie gain a win), so if any score is better than -infinity
@@ -233,25 +244,16 @@ class App extends Component {
 // is the best move, and the index of the move corresponds to the square where
 // O should insert itself.
     var bestMove;
-    if (player === "O") {
-      var bestScore = -Infinity;
-      for (var i = 0; i < allMoves.length; i++) {
-        if (allMoves[i].score > bestScore) {
-          bestScore = allMoves[i].score;
-          bestMove = i;
-        }
-      }
-    } else {
-      // the Human's goal is to minimize. If any score is less than Infinity (ie -100)
-      // then that is the best score for the human's best predicted move.
-      var bestScore = Infinity;
-      for (var i = 0; i < allMoves.length; i++) {
-        if (allMoves[i].score < bestScore) {
-          bestScore = allMoves[i].score;
-          bestMove = i;
-        }
+    var bestScore = player == "O"? -Infinity : Infinity;
+
+    for (var i = 0; i < allMoves.length; i++) {
+      if ((player == "O" && allMoves[i].score > bestScore) ||
+        (player == "X" && allMoves[i].score < bestScore)) {
+        bestScore = allMoves[i].score;
+        bestMove = i;
       }
     }
+
     return allMoves[bestMove];
     // return the bestMove
   }
@@ -260,22 +262,18 @@ class App extends Component {
   // If any of those boxes equal XXX or OOO when added together, that means there
   // is a winner.
   checkWinner(squares, player){
-    var winningPlayer = player + player + player
-    if (
-      (squares[0] + squares[1] + squares[2] === winningPlayer) ||
-      (squares[3] + squares[4] + squares[5] === winningPlayer) ||
-      (squares[6] + squares[7] + squares[8] === winningPlayer) ||
-      (squares[0] + squares[3] + squares[6] === winningPlayer) ||
-      (squares[1] + squares[4] + squares[7] === winningPlayer) ||
-      (squares[2] + squares[5] + squares[8] === winningPlayer) ||
-      (squares[2] + squares[4] + squares[6] === winningPlayer) ||
-      (squares[0] + squares[4] + squares[8] === winningPlayer)
-    ) {
-      return true
-    } else {
-      return false
+    let winningCombinations = this.state.winningCombinations
+    let winningPlayer = player + player + player
+
+    for (var i = 0; i< winningCombinations.length; i++) {
+      var win = winningCombinations[i]
+      if (squares[win[0]] + squares[win[1]] + squares[win[2]] === winningPlayer) {
+        return true;
+      }
     }
+    return false;
   }
+
   // Function for Each DIV click
   handleClick(i) {
     let board = this.state.board
