@@ -13,16 +13,6 @@ class App extends Component {
       winner: false,
       tie: false,
       level: 'intermediate',
-      winningCombinations: [
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-      [0,3,6],
-      [1,4,7],
-      [2,5,8],
-      [2,4,6],
-      [0,4,8]
-      ],
     };
     this.handleClick = this.handleClick.bind(this)
     // function for user click event on each square
@@ -34,6 +24,8 @@ class App extends Component {
     // function for advanced move (minimax)
     this.setLevel = this.setLevel.bind(this)
     // function to set level to intermediate or advanced
+    this.winningCombinations =  [[0,1,2], [3,4,5], [6,7,8], [0,3,6],
+    [1,4,7], [2,5,8],[2,4,6],[0,4,8]]
   }
 
 
@@ -181,7 +173,7 @@ class App extends Component {
   }
 
   // A Minimax algorithm I refactored for React (unbeatable A.I.)
-  minimax(board, player){
+  minimax(board, player, depth=0){
 
 
     // filter board for vacant spots
@@ -189,16 +181,18 @@ class App extends Component {
 
     // When this function is recursively called each time, this is the terminal state
     // to end the recursion.
-    // if there is a winner for 'X' the score is the minimum (-100) and maximum (100)
+    // if there is a winner for 'X' the score is the minimum (ie -100, -98 etc...) and maximum (ie 100, 99 98 etc...)
     // for the AI, this checks to see if the AI or the Human won and returns the
     // corresponding score (or 0 if there is no vacant spots for a tie)
+
+    // depth = # of moves it takes to reach terminal state.
     if (this.checkWinner(board, "X")) {
       return {
-        score: -100
+        score: -100 + depth
       };
     } else if (this.checkWinner(board, "O")) {
       return {
-        score: 100
+        score: 100 - depth
       };
     } else if (vacantArray.length === 0) {
       return {
@@ -222,9 +216,9 @@ class App extends Component {
 
 
       player === "O"? (
-          possibleMove.score = this.minimax(board, "X").score
+          possibleMove.score = this.minimax(board, "X", depth+1).score
         ) : (
-          possibleMove.score = this.minimax(board, "O").score
+          possibleMove.score = this.minimax(board, "O", depth+1).score
         );
         // if current player is AI, minimax function is recursively called on
         // on X (to see what the best move for the human would be, after the AI's move).
@@ -262,11 +256,10 @@ class App extends Component {
   // If any of those boxes equal XXX or OOO when added together, that means there
   // is a winner.
   checkWinner(squares, player){
-    let winningCombinations = this.state.winningCombinations
     let winningPlayer = player + player + player
 
-    for (var i = 0; i< winningCombinations.length; i++) {
-      var win = winningCombinations[i]
+    for (var i = 0; i< this.winningCombinations.length; i++) {
+      var win = this.winningCombinations[i]
       if (squares[win[0]] + squares[win[1]] + squares[win[2]] === winningPlayer) {
         return true;
       }
