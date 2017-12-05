@@ -23,5 +23,5 @@ This game incorporates the [Minimax Algorithm](https://en.wikipedia.org/wiki/Min
 [Code is located here](https://github.com/natashaU/SmartTicTacToe/blob/f51f10367f8ff03d12f4dff29b987aac2f53f751/src/App.js#L80-L171)
 
 **Code for a Minimax algorithm (unbeatable A.I.) I refactored for React:**
-[Minimax Code here](https://github.com/natashaU/SmartTicTacToe/blob/f51f10367f8ff03d12f4dff29b987aac2f53f751/src/App.js#L174-L257)
+[Minimax Code here](https://github.com/natashaU/SmartTicTacToe/blob/03a85a3c43613d92807c913dadc6c5baaba6436b/src/App.js#L176-L253)
 
